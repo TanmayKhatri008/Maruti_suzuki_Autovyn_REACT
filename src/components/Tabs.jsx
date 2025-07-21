@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Tabs.css";
-import Shift from "./shift";
+import Shift from "./Shift.jsx";
 import DeploymentTable from "./deployment";
 import Attendancedropdown from "./attendance-dropdown";
 import AttendanceTable from "./attendance_table";
