@@ -1,11 +1,15 @@
 import "./Operator_information.css";
 import Tabs from "./Tabs";
 
-
 function Operator_information({ user }) {
-  if (!user) return <div>Please select a user from the left.</div>;
+  if (!user) {
+    return (
+      <div className="OperatorOthers">
+        Please select a user from the left or navigate to a user's profile.
+      </div>
+    );
+  }
 
-  // Determine border color based on relieving days
   const borderColor = parseInt(user.daysLeft) > 30 ? "green" : "red";
 
   return (
@@ -45,7 +49,8 @@ function Operator_information({ user }) {
           </p>
         </div>
       </div>
-      <Tabs user={user}></Tabs>
+
+      <Tabs user={user} />
     </div>
   );
 }

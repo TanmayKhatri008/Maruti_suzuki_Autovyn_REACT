@@ -1,8 +1,11 @@
-// AttendanceTable.jsx
 import React from "react";
 import "./attendance_table.css";
 
 const AttendanceTable = ({ attendance }) => {
+  if (!attendance || attendance.length === 0) {
+    return <div className="attendance-container">No attendance records found.</div>;
+  }
+
   return (
     <div className="attendance-container">
       <table className="attendance-table">
@@ -16,11 +19,16 @@ const AttendanceTable = ({ attendance }) => {
         </thead>
         <tbody>
           {attendance.map((entry, index) => (
-            <tr key={index} className={entry.status === "Absent" ? "absent-row" : ""}>
+            <tr
+              key={index}
+              className={entry.status === "Absent" ? "absent-row" : ""}
+            >
               <td>{entry.date}</td>
-              <td style={{ color: entry.status === "Absent" ? "red" : "black" }}>{entry.status}</td>
-              <td>{entry.inTime !== "-" ? entry.inTime : "-"}</td>
-              <td>{entry.outTime !== "-" ? entry.outTime : "Absent"}</td>
+              <td style={{ color: entry.status === "Absent" ? "red" : "black" }}>
+                {entry.status}
+              </td>
+              <td>{entry.inTime && entry.inTime !== "-" ? entry.inTime : "—"}</td>
+              <td>{entry.outTime && entry.outTime !== "-" ? entry.outTime : "Absent"}</td>
             </tr>
           ))}
         </tbody>
