@@ -1,47 +1,43 @@
 import users from "./userData";
 import "./Sidebar.css";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
 function Sidebar({ onSelectOperator, selectedOperator, showActive, searchTerm }) {
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   const filteredUsers = users
     .filter((user) => user.active === showActive)
-    .filter((user) =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.id.toLowerCase().includes(searchTerm.toLowerCase())
+    .filter(
+      (user) =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.id.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
   const handleUserClick = (user) => {
-    onSelectOperator(user); // Still update the selected user in App.jsx state
-    navigate(`/operator/${user.id}`); // Navigate to the operator's specific route
+    onSelectOperator(user);
+    navigate(`/operator/${user.id}`);
   };
 
   return (
     <div className="sidebar">
       {filteredUsers.length === 0 ? (
-        <p style={{ padding: "10px", color: "#666" }}>No users found.</p>
+        <p className="no-users">No users found.</p>
       ) : (
         filteredUsers.map((user) => {
           const isSelected = selectedOperator?.id === user.id;
-
-          const borderColor = isSelected
-            ? parseInt(user.daysLeft) > 30 // Corrected from user.dayLeft to user.daysLeft
-              ? "green"
-              : "red"
-            : "transparent";
+          const borderColorClass =
+            parseInt(user.daysLeft) > 30 ? "green" : "red";
 
           return (
             <div
               key={user.id}
               className={`user-card ${isSelected ? "selected" : ""}`}
-              onClick={() => handleUserClick(user)} // Use the new handler
+              onClick={() => handleUserClick(user)}
             >
               <img
                 src={user.image}
                 alt={user.name}
-                className="user-icon"
-                style={{ borderColor }}
+                className={`user-icon ${isSelected ? borderColorClass : ""}`}
               />
               <div className="user-text">
                 <p className="user-name">{user.name}</p>
