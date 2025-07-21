@@ -1,5 +1,5 @@
 import users from "./userData";
-import "./Sidebar.css";
+import "./SideBar.css";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar({ onSelectOperator, selectedOperator, showActive, searchTerm }) {

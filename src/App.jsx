@@ -10,7 +10,6 @@ import Operator_information from "./components/Operator_information";
 
 import "./App.css";
 
-// ✅ Corrected logic here
 function OperatorPanel({
   users,
   showActive,
